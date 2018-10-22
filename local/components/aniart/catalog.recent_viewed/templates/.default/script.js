@@ -15,12 +15,16 @@
 			var productId = this.$el.data('id');
 			this.$delete = this.$el.find(this.deleteSelector);
 			this.$delete.on('click', function(){
+
 				$.post(_this.ajaxHandler, {
 					handler: 'reсent_viewed',
 					f: 'deleteItem',
 					productId: productId
-				}, function(response){
+				}, function(response){console.log(response);
 					// в случае успешного запроса скрываем удаленный (текущий элемент)
+					if(response.status == 'sucsess'){
+						$( '.bx_catalog_item[data-id="'+ response.id +'"]' ).remove();
+					}
 				}, 'json')
 			});
 		}
